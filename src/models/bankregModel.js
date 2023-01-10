@@ -46,6 +46,7 @@ const bankregcompanySchema=new mongoose.Schema({
         type:String,
         required:true,
         trim:true
-    }
-})
+    },
+    
+},{timestmaps:true})
 module.exports=mongoose.model("bankregcompany",bankregcompanySchema)

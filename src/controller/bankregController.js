@@ -21,7 +21,7 @@ const createbankreg = async function (req, res){
             return res.status(400).send({ status: false, message: `email: ${email} already exist` });
           }
         if (!validator.isValidEmail(email)) return res.status(400).send({ status: false, message: "Email is invalid" })
-        
+
         if(!contactPersonName){
             return res.status(404).send({ status: false, message: "contactPersonname must be in body" })
 
@@ -79,4 +79,30 @@ const allbankreg=async function (req,res){
         res.status(500).send({ status: false, message: error.message })
     }
 }
-module.exports={createbankreg,allbankreg}
+
+// Final data Updation
+const updatebankreg=async function(req,res){
+    try{
+        let bankregid=req.params.bankregid
+        let body=req.body
+        
+        const updateDetails = await bankregModel.findOneAndUpdate({_id:bankregid}, body, { new: true })
+     return res.status(200).send({ status: true, message: " bankreg update successfully ", data: updateDetails });
+}catch(error){
+    res.status(500).send({ status: false, message: error.message })
+}
+}
+
+//for data deletion
+const deletebankreg=async function(req,res){
+    try {
+        let bankregid=req.params.bankregid
+        let body=req.body
+        const deletebankreg=await bankregModel.updateOne({_id:bankregid},body,{isDeleted:true})
+        return res.status(200).send({ status: true, message: " bankreg delete successfully ", data: deletebankreg });
+
+    } catch (error) {
+        
+    }
+}
+module.exports={createbankreg,allbankreg,updatebankreg,deletebankreg}

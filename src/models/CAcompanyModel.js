@@ -7,7 +7,8 @@ const CAcompanySchema=new mongoose.Schema({
     },
     email: {
         type:String,
-        required:true
+        required:true,
+        trim:true
     },
     mobile: {
         type:String,
@@ -16,6 +17,7 @@ const CAcompanySchema=new mongoose.Schema({
     admin: {
         type:Boolean,
         default:false
-    }
-})
+    },
+    
+},{timestamps:true})
 module.exports=mongoose.model("CAcompany",CAcompanySchema)

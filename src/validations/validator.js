@@ -21,5 +21,11 @@ const isValidMobile = function (mobile) {
     return regexForPinCode.test(pinCode)
   }
 
-module.exports={isValidEmail,isValidMobile,isValidcontactPersonNumber,isValidPinCode}
+  //_________________________________________password validation_________________________________________
+const isValidPassword = function (password) {
+  const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/
+  return passwordRegex.test(password)
+}
+
+module.exports={isValidEmail,isValidMobile,isValidcontactPersonNumber,isValidPinCode,isValidPassword}
 
