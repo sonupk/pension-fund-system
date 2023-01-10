@@ -19,19 +19,16 @@ const createCAcompany = async function (req, res){
         }
         if(!validator.isValidMobile(mobile)) return res.status(400).send({ status: false, message: "mobile is invalid" })
 
-
-
-
+        //------------------------creating a data of CA comapny---------------------------
         const createCAcompany = await CAcompanyModel.create(data);
         res.status(201).send({ status: true, message: createCAcompany })
 
-        
-        
-    } catch (error) {
+        } catch (error) {
         res.status(500).send({ status: false, message: error.message })
     }
 }
 
+//-------------------------------fetching data of CA comapny-----------------------------
 const getallCAcompany=async function (req,res){
     try {
         const charteredComapny=await CAcompanyModel.find()

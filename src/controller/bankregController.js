@@ -14,8 +14,14 @@ const createbankreg = async function (req, res){
         }
         if (!email) {
             return res.status(404).send({ status: false, message: "email must be in body" })
+
         }
+        const isEmailUnique=await bankregModel.findOne({email})
+        if (isEmailUnique) {
+            return res.status(400).send({ status: false, message: `email: ${email} already exist` });
+          }
         if (!validator.isValidEmail(email)) return res.status(400).send({ status: false, message: "Email is invalid" })
+        
         if(!contactPersonName){
             return res.status(404).send({ status: false, message: "contactPersonname must be in body" })
 
@@ -53,21 +59,17 @@ const createbankreg = async function (req, res){
             return res.status(404).send({ status: false, message: "state must be in body" })
         }
         
-
-
-
-
-
+        
+//---------------------------creating bank registartion---------------------------
         const createbankreg = await bankregModel.create(data);
         res.status(201).send({ status: true, message: createbankreg })
 
-
-
-    } catch (error) {
+ } catch (error) {
         res.status(500).send({ status: false, message: error.message })
     }
 }
 
+//----------------------fetching data of bank registartions-------------------------
 const allbankreg=async function (req,res){
     try {
         const banks=await bankregModel.find()

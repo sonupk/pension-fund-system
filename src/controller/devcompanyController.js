@@ -21,10 +21,8 @@ const createdevcompany = async function (req, res){
             return res.status(404).send({status:false,message:"mobile must be present"})
         }
         if(!validator.isValidMobile(mobile)) return res.status(400).send({ status: false, message: "mobile is invalid" })
-
-
-
-
+        
+        //-------------------------creating a development company--------------------------
         const createdevcompany = await devcompanyModel.create(data);
         res.status(201).send({ status: true, message: createdevcompany })
 
@@ -34,6 +32,7 @@ const createdevcompany = async function (req, res){
     }
 }
 
+//------------------------------fetching all data of development company---------------------
 const getalldevcompany= async function(req,res){
     try {
         const devComapny=await devcompanyModel.find()
