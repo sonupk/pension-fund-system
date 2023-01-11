@@ -7,7 +7,7 @@ const jwt = require("jsonwebtoken")
 const createUser = async function (req, res){
     try {
         const data=req.body
-        const{name,email,mobile,password}=data
+        const{name,email,mobile,password,bankId}=data
         if (Object.keys(data).length == 0) {
             return res.status(404).send({ status: false, message: "data must be in body" })
         }
@@ -26,6 +26,9 @@ const createUser = async function (req, res){
             return res.status(404).send({status:false,message:"password must be present"})
         }
         if (!validator.isValidPassword(password)) return res.status(400).send({ status: false, message: "password is invalid" })
+        if(!bankId){
+          return res.status(404).send({ status: false, message: "bankId must be in body" })
+        }
 
 
 
@@ -70,7 +73,7 @@ const userLogin = async function (req, res) {
         userId: loginUser._id, iat: Math.floor(Date.now() / 1000),
         exp: Math.floor(Date.now() / 1000) + 20 * 60 * 60
         
-      }, "projectfund1");
+      }, "pensionfund1");
       
       //------------------------------ Successful Token generated ----------------------------------------
       res.status(200).send({ status: true, msg: "user successfully logged in ", data: { token } })

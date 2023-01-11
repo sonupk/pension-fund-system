@@ -80,7 +80,7 @@ const allbankreg=async function (req,res){
     }
 }
 
-// Final data Updation
+// ------------------------- data Updation of bank reg-------------------------------
 const updatebankreg=async function(req,res){
     try{
         let bankregid=req.params.bankregid
@@ -93,7 +93,7 @@ const updatebankreg=async function(req,res){
 }
 }
 
-//for data deletion
+//-----------------------for data deletion of bank reg
 const deletebankreg=async function(req,res){
     try {
         let bankregid=req.params.bankregid
@@ -102,7 +102,7 @@ const deletebankreg=async function(req,res){
         return res.status(200).send({ status: true, message: " bankreg delete successfully ", data: deletebankreg });
 
     } catch (error) {
-        
+        res.status(500).send({ status: false, message: error.message })
     }
 }
 module.exports={createbankreg,allbankreg,updatebankreg,deletebankreg}

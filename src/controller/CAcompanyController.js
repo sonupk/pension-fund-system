@@ -38,4 +38,30 @@ const getallCAcompany=async function (req,res){
         res.status(500).send({ status: false, message: error.message })
     }
 }
-module.exports={createCAcompany,getallCAcompany}
+
+// ------------------------------data Updation of CA company
+const updateCAcompany=async function(req,res){
+    try{
+        let CAcompanyid=req.params.CAcompanyid
+        let body=req.body
+        
+        const updateDetails = await CAcompanyModel.findOneAndUpdate({_id:CAcompanyid}, body, { new: true })
+     return res.status(200).send({ status: true, message: " CA company update successfully ", data: updateDetails });
+}catch(error){
+    res.status(500).send({ status: false, message: error.message })
+}
+}
+//-----------------------------for data deletion of CA company
+const deleteCAcompany=async function(req,res){
+    try {
+        let CAcompanyid=req.params.CAcompanyid
+        let body=req.body
+        const deleteCAcompany=await CAcompanyModel.updateOne({_id:CAcompanyid},body,{isDeleted:true})
+        return res.status(200).send({ status: true, message: " CA company delete successfully ", data: deleteCAcompany });
+
+    } catch (error) {
+        res.status(500).send({ status: false, message: error.message })
+    }
+}
+
+module.exports={createCAcompany,getallCAcompany,updateCAcompany,deleteCAcompany}

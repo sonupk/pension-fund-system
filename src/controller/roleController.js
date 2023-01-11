@@ -24,7 +24,18 @@ const createRole=async function(req,res){
         res.status(500).send({ status: false, message: error.message })
     }
 }
-// Final data Updation
+
+//----------------------fetching data roles------------------------------------
+const getallrole=async function (req,res){
+    try {
+        const roles=await roleModel.find()
+        res.status(200).send({ status: true, data: roles })
+
+    } catch (error) {
+        res.status(500).send({ status: false, message: error.message })
+    }
+}
+// ---------------------- data Updation of roles--------------------------------
 const updateRole=async function(req,res){
     try{
         let roleid=req.params.roleid
@@ -36,7 +47,7 @@ const updateRole=async function(req,res){
     res.status(500).send({ status: false, message: error.message })
 }
 }
-//for role deletion
+//------------------------------for role deletion-------------------------------------
 const deleteRole=async function(req,res){
     try {
         let roleid=req.params.roleid
@@ -50,4 +61,4 @@ const deleteRole=async function(req,res){
 }
 
 
-module.exports={createRole,updateRole,deleteRole}
+module.exports={createRole,getallrole,updateRole,deleteRole}

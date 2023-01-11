@@ -42,4 +42,31 @@ const getalldevcompany= async function(req,res){
         res.status(500).send({ status: false, message: error.message })
     }
 }
-module.exports={createdevcompany,getalldevcompany}
+
+// Final data Updation
+const updatedevcompany=async function(req,res){
+    try{
+        let devcompanyid=req.params.devcompanyid
+        let body=req.body
+        
+        const updateDetails = await devcompanyModel.findOneAndUpdate({_id:devcompanyid}, body, { new: true })
+     return res.status(200).send({ status: true, message: " devcompany update successfully ", data: updateDetails });
+}catch(error){
+    res.status(500).send({ status: false, message: error.message })
+}
+}
+
+//for data deletion
+const deletedevcompany=async function(req,res){
+    try {
+        let devcompanyid=req.params.devcompanyid
+        let body=req.body
+        const deletedevcompany=await devcompanyModel.updateOne({_id:devcompanyid},body,{isDeleted:true})
+        return res.status(200).send({ status: true, message: " bankreg delete successfully ", data: deletedevcompany });
+
+    } catch (error) {
+        res.status(500).send({ status: false, message: error.message })
+    }
+}
+
+module.exports={createdevcompany,getalldevcompany,updatedevcompany,deletedevcompany}
