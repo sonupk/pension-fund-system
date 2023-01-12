@@ -16,6 +16,11 @@ const roleSchema=new mongoose.Schema({
         required: true, 
         trim: true 
     },
+    isDeleted: { 
+        type: Boolean, 
+        default: false 
+    },
+
 
 },{timestamps:true})
 module.exports=mongoose.model("role",roleSchema)

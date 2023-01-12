@@ -36,3 +36,5 @@ const userSchema=new mongoose.Schema({
     
 },{timestamps:true})
 module.exports=mongoose.model("user",userSchema)
+// // ------------------------------Can't Set deleted true at creation time------------------------------
+// if (isDeleted == true) return res.status(400).send({ status: false, message: "You can't add this key at creation time." })

@@ -47,6 +47,10 @@ const bankregcompanySchema=new mongoose.Schema({
         required:true,
         trim:true
     },
+    isDeleted: { 
+        type: Boolean, 
+        default: false 
+    },
     
 },{timestmaps:true})
 module.exports=mongoose.model("bankregcompany",bankregcompanySchema)

@@ -13,6 +13,10 @@ const designationSchema=new mongoose.Schema({
         required: true, 
         trim: true 
     },
+    isDeleted: { 
+        type: Boolean, 
+        default: false 
+    },
 
 },{timestamps:true})
 module.exports=mongoose.model("designation",designationSchema)
